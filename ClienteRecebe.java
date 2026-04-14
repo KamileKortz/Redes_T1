@@ -11,7 +11,7 @@ public class ClienteRecebe {
         while (true) {
             int n = in.read(buf);
             if (n > 0) {
-                System.out.println(new String(buf, 0, n));
+                System.out.print(new String(buf, 0, n));
             }
         }
     }

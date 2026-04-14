@@ -5,7 +5,7 @@ public class ClienteEnvio {
     public static void main(String[] args) throws Exception {
 
         Socket s = new Socket("127.0.0.1", 9002);
-        OutputStream out = s.getOutputStream();
+        PrintWriter out = new PrintWriter(s.getOutputStream(), true);
 
         BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 
@@ -13,7 +13,7 @@ public class ClienteEnvio {
 
         while (true) {
             String msg = teclado.readLine();
-            out.write((msg + "\n").getBytes());
+            out.print(msg);
         }
     }
 }

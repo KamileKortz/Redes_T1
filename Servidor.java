@@ -31,7 +31,7 @@ public class Servidor {
                     break;
 
                 String msg = new String(buf, 0, n);
-                System.out.println("Recebido: " + msg);
+                System.out.print("Recebido: " + msg);
 
                 for (Socket cliente : clientes) {
                     OutputStream out = cliente.getOutputStream();
