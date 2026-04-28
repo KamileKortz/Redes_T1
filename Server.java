@@ -1,13 +1,13 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import java.util.concurrent.Semaphore;
-import java.text.SimpleDateFormat;
+import java.util.concurrent.Semaphore; // Importa a classe Semaphore, que serve pra controlar o acesso de várias threads a um mesmo recurso
+import java.text.SimpleDateFormat; // Importa a classe SimpleDateFormat, que serve pra transformar datas em texto formatado
 
 public class Server {
 
     // lista com os canais de saída de todos os clientes conectados, pra mandar
-    // mensagem pra todos)
+    // mensagem pra todos
     private static List<OutputStream> ouvintes = new ArrayList<>();
 
     // Controla o envio de mensagens, só um jogador pode mandar mensagem por vez
@@ -19,12 +19,12 @@ public class Server {
         // Fica esperando novos clientes. Cria uma thread separada pra cada cliente que
         // entra
         while (true) {
-            Socket conn = server.accept();
-            new Thread(() -> {
-                try {
-                    InputStream in = conn.getInputStream();
-                    OutputStream out = conn.getOutputStream();
-                    String ip = conn.getInetAddress().getHostAddress();
+            Socket conn = server.accept(); // server.accept() pausa o programa até alguém conectar, quando um cliente entra cria um Socket que fica guardado em conn
+            new Thread(() -> { // Cria uma nova thread pro cliente (a thread permite vários clientes ao mesmo tempo)
+                try { // Serve pra evitar que o servidor pare por causa de um "erro" do cliente
+                    InputStream in = conn.getInputStream(); // Recebe dados enviados pelo cliente
+                    OutputStream out = conn.getOutputStream(); // Envia dados pro o cliente
+                    String ip = conn.getInetAddress().getHostAddress(); // Obtém o endereço IP do cliente conectado (conn.getInetAddress() pega o endereço da conexão; getHostAddress() converte para texto)
 
                     byte[] buf = new byte[1024];
 
@@ -55,9 +55,10 @@ public class Server {
                         }
                         semaforo.release();
                     }
-                } catch (Exception e) {
+                } catch (Exception e) { // Captura qualquer erro que aconteça dentro do try
+                    // O bloco tá vazio, se acontecer erro, o programa só ignora
                 }
-            }).start();
+            }).start(); // Inicia a execução da thread
         }
     }
 }
