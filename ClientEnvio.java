@@ -1,10 +1,10 @@
-import java.io.*; // Importa classes do pacote java.io.*, usado para entrada e saída de daods (InputStream, OutputStream)
-import java.net.*; // Importa classes do pacote java.net, usado para comunicação em rede (Sockets)
-import java.util.Scanner; // Importa a classe Scanner, que serve para ler dados digitados pelo usuário no teclado.
+import java.io.*; // Importa classes do pacote java.io.*, serve pra entrada e saída de daods (InputStream, OutputStream)
+import java.net.*; // Importa classes do pacote java.net, serve pra comunicação em rede (Sockets)
+import java.util.Scanner; // Importa a classe Scanner, que serve pra ler dados digitados
 
 public class ClientEnvio {
     public static void main(String[] args) throws Exception {
-        Socket s = new Socket("127.0.0.1", 9002); // Cria um socket para se conectar a um servidor
+        Socket s = new Socket("127.0.0.1", 9002); // Cria um socket pra se conectar com um servidor
         OutputStream out = s.getOutputStream(); // Serve pra enviar dados para o servidor
         Scanner LER = new Scanner(System.in);
 
